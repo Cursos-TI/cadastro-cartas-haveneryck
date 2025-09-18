@@ -1,9 +1,9 @@
 #include <stdio.h>
 
-#define TOTAL_CARTAS 32
+#define TOTAL_CARTAS 3 //Alterei o número de cartas para facilitar os testes, caso queira mais cartas, basta mudar o número 3 pelo desejado.
 
 typedef struct {
-    char codigo[4]; // Ex: A01
+    char codigo[4];
     int populacao;
     float area;
     float pib;
@@ -33,6 +33,19 @@ int main() {
 
         printf("Número de pontos turísticos: ");
         scanf("%d", &cartas[i].pontosTuristicos);
+
+        // Cálculos do nível aventureiro
+        if (cartas[i].area > 0) {
+            cartas[i].densidadePopulacional = cartas[i].populacao / cartas[i].area;
+        } else {
+            cartas[i].densidadePopulacional = 0;
+        }
+
+        if (cartas[i].populacao > 0) {
+            cartas[i].pibPerCapita = cartas[i].pib / cartas[i].populacao;
+        } else {
+            cartas[i].pibPerCapita = 0;
+        }
     }
 
     printf("\nCartas cadastradas:\n");
