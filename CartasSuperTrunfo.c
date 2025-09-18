@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define TOTAL_CARTAS 3 //Alterei o número de cartas para facilitar os testes, caso queira mais cartas, basta mudar o número 3 pelo desejado.
+#define TOTAL_CARTAS 3
 
 typedef struct {
     char codigo[4];
@@ -56,6 +56,8 @@ int main() {
         printf("Área: %.2f km²\n", cartas[i].area);
         printf("PIB: %.2f bilhões\n", cartas[i].pib);
         printf("Pontos turísticos: %d\n", cartas[i].pontosTuristicos);
+        printf("Densidade Populacional: %.2f hab/km²\n", cartas[i].densidadePopulacional);
+        printf("PIB per Capita: %.6f bilhões/hab\n", cartas[i].pibPerCapita);
     }
 
     return 0;
