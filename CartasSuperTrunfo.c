@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define TOTAL_CARTAS 3
+#define TOTAL_CARTAS 4
 
 typedef struct {
     char codigo[4];
@@ -59,6 +59,14 @@ int main() {
         printf("Densidade Populacional: %.2f hab/km²\n", cartas[i].densidadePopulacional);
         printf("PIB per Capita: %.6f bilhões/hab\n", cartas[i].pibPerCapita);
     }
+
+    // Seleção de cartas para comparação
+    int indice1, indice2;
+    printf("\nEscolha duas cartas para comparar (0 a %d):\n", TOTAL_CARTAS - 1);
+    printf("Índice da primeira carta: ");
+    scanf("%d", &indice1);
+    printf("Índice da segunda carta: ");
+    scanf("%d", &indice2);
 
     return 0;
 }
