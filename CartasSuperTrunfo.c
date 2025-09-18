@@ -3,11 +3,13 @@
 #define TOTAL_CARTAS 32
 
 typedef struct {
-    char codigo[4];
+    char codigo[4]; // Ex: A01
     int populacao;
     float area;
     float pib;
     int pontosTuristicos;
+    float densidadePopulacional;
+    float pibPerCapita;
 } Carta;
 
 int main() {
