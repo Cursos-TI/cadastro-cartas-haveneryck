@@ -33,5 +33,15 @@ int main() {
         scanf("%d", &cartas[i].pontosTuristicos);
     }
 
+    printf("\nCartas cadastradas:\n");
+
+    for (int i = 0; i < TOTAL_CARTAS; i++) {
+        printf("\nCódigo: %s\n", cartas[i].codigo);
+        printf("População: %d\n", cartas[i].populacao);
+        printf("Área: %.2f km²\n", cartas[i].area);
+        printf("PIB: %.2f bilhões\n", cartas[i].pib);
+        printf("Pontos turísticos: %d\n", cartas[i].pontosTuristicos);
+    }
+
     return 0;
 }
