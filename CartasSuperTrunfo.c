@@ -3,7 +3,7 @@
 #define TOTAL_CARTAS 32
 
 typedef struct {
-    char codigo[4]; // Ex: A01
+    char codigo[4];
     int populacao;
     float area;
     float pib;
@@ -11,5 +11,9 @@ typedef struct {
 } Carta;
 
 int main() {
+    Carta cartas[TOTAL_CARTAS];
+
+    printf("Cadastro das cartas do Super Trunfo - Países\n");
+
     return 0;
 }
