@@ -98,5 +98,6 @@ int main() {
         printf("Empate geral entre as cartas!\n");
     }
 
+    
     return 0;
 }
