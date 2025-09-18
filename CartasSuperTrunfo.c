@@ -87,5 +87,16 @@ int main() {
     printf("PIB per Capita: %s\n", cartas[indice1].pibPerCapita > cartas[indice2].pibPerCapita ? cartas[indice1].codigo : cartas[indice2].codigo);
     printf("Densidade Populacional (vence o menor): %s\n", cartas[indice1].densidadePopulacional < cartas[indice2].densidadePopulacional ? cartas[indice1].codigo : cartas[indice2].codigo);
 
+    printf("\nSuper Poder de %s: %.2f\n", cartas[indice1].codigo, superPoder1);
+    printf("Super Poder de %s: %.2f\n", cartas[indice2].codigo, superPoder2);
+
+    if (superPoder1 > superPoder2) {
+        printf("Carta vencedora geral: %s\n", cartas[indice1].codigo);
+    } else if (superPoder2 > superPoder1) {
+        printf("Carta vencedora geral: %s\n", cartas[indice2].codigo);
+    } else {
+        printf("Empate geral entre as cartas!\n");
+    }
+
     return 0;
 }
