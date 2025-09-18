@@ -78,5 +78,14 @@ int main() {
                         cartas[indice2].pontosTuristicos +
                         cartas[indice2].pibPerCapita;
 
+    printf("\nComparação entre %s e %s:\n", cartas[indice1].codigo, cartas[indice2].codigo);
+
+    printf("População: %s\n", cartas[indice1].populacao > cartas[indice2].populacao ? cartas[indice1].codigo : cartas[indice2].codigo);
+    printf("Área: %s\n", cartas[indice1].area > cartas[indice2].area ? cartas[indice1].codigo : cartas[indice2].codigo);
+    printf("PIB: %s\n", cartas[indice1].pib > cartas[indice2].pib ? cartas[indice1].codigo : cartas[indice2].codigo);
+    printf("Pontos turísticos: %s\n", cartas[indice1].pontosTuristicos > cartas[indice2].pontosTuristicos ? cartas[indice1].codigo : cartas[indice2].codigo);
+    printf("PIB per Capita: %s\n", cartas[indice1].pibPerCapita > cartas[indice2].pibPerCapita ? cartas[indice1].codigo : cartas[indice2].codigo);
+    printf("Densidade Populacional (vence o menor): %s\n", cartas[indice1].densidadePopulacional < cartas[indice2].densidadePopulacional ? cartas[indice1].codigo : cartas[indice2].codigo);
+
     return 0;
 }
