@@ -34,7 +34,6 @@ int main() {
         printf("Número de pontos turísticos: ");
         scanf("%d", &cartas[i].pontosTuristicos);
 
-        // Cálculos do nível aventureiro
         if (cartas[i].area > 0) {
             cartas[i].densidadePopulacional = cartas[i].populacao / cartas[i].area;
         } else {
@@ -60,13 +59,24 @@ int main() {
         printf("PIB per Capita: %.6f bilhões/hab\n", cartas[i].pibPerCapita);
     }
 
-    // Seleção de cartas para comparação
     int indice1, indice2;
     printf("\nEscolha duas cartas para comparar (0 a %d):\n", TOTAL_CARTAS - 1);
     printf("Índice da primeira carta: ");
     scanf("%d", &indice1);
     printf("Índice da segunda carta: ");
     scanf("%d", &indice2);
+
+    float superPoder1 = cartas[indice1].populacao +
+                        cartas[indice1].area +
+                        cartas[indice1].pib +
+                        cartas[indice1].pontosTuristicos +
+                        cartas[indice1].pibPerCapita;
+
+    float superPoder2 = cartas[indice2].populacao +
+                        cartas[indice2].area +
+                        cartas[indice2].pib +
+                        cartas[indice2].pontosTuristicos +
+                        cartas[indice2].pibPerCapita;
 
     return 0;
 }
