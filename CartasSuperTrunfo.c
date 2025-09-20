@@ -1,21 +1,21 @@
 #include <stdio.h>
 #include <string.h>
 
-#define TOTAL_CARTAS 4
+#define TOTAL_CARTAS 4 // Número total de cartas no jogo
 
 // Estrutura que representa uma carta do Super Trunfo
 typedef struct {
     char codigo[4];               // Código da carta (ex: A01)
     char nome[30];                // Nome do país
-    int populacao;               // População total
-    float area;                  // Área em km²
-    float pib;                   // PIB em bilhões
-    int pontosTuristicos;        // Número de pontos turísticos
-    float densidadePopulacional; // População / Área
-    float pibPerCapita;          // PIB / População
+    int populacao;                // População total
+    float area;                   // Área em km²
+    float pib;                    // PIB em bilhões
+    int pontosTuristicos;         // Número de pontos turísticos
+    float densidadePopulacional;  // População / Área
+    float pibPerCapita;           // PIB / População
 } Carta;
 
-// Função auxiliar para obter o valor do atributo
+// Função auxiliar para obter o valor de um atributo com base no número escolhido
 float obterValor(Carta c, int atributo) {
     switch (atributo) {
         case 1: return c.populacao;
@@ -27,7 +27,7 @@ float obterValor(Carta c, int atributo) {
     }
 }
 
-// Função auxiliar para obter o nome do atributo
+// Função auxiliar para retornar o nome textual de um atributo
 char* nomeAtributo(int atributo) {
     switch (atributo) {
         case 1: return "População";
@@ -74,7 +74,6 @@ int main() {
 
     // Exibição das cartas cadastradas
     printf("\nCartas cadastradas:\n");
-
     for (int i = 0; i < TOTAL_CARTAS; i++) {
         printf("\nCódigo: %s\n", cartas[i].codigo);
         printf("Nome: %s\n", cartas[i].nome);
@@ -85,8 +84,8 @@ int main() {
         printf("Densidade Populacional: %.2f hab/km²\n", cartas[i].densidadePopulacional);
         printf("PIB per Capita: %.6f bilhões/hab\n", cartas[i].pibPerCapita);
     }
-
-    // Escolha de duas cartas para comparação
+    
+    // Escolha dos índices das cartas para comparar
     int indice1, indice2;
     printf("\nEscolha duas cartas para comparar (0 a %d):\n", TOTAL_CARTAS - 1);
     printf("Índice da primeira carta: ");
@@ -94,12 +93,13 @@ int main() {
     printf("Índice da segunda carta: ");
     scanf("%d", &indice2);
 
+    // Validação dos índices
     if (indice1 < 0 || indice1 >= TOTAL_CARTAS || indice2 < 0 || indice2 >= TOTAL_CARTAS) {
         printf("\nErro: Índices inválidos. Encerrando comparação.\n");
         return 1;
     }
 
-    // Menu para escolha do primeiro atributo
+    // Escolha do primeiro atributo
     int atributo1, atributo2;
     printf("\nEscolha o primeiro atributo para comparação:\n");
     printf("1 - População\n");
@@ -110,12 +110,13 @@ int main() {
     printf("Opção: ");
     scanf("%d", &atributo1);
 
+    // Validação do primeiro atributo
     if (atributo1 < 1 || atributo1 > 5) {
         printf("\nErro: Atributo inválido. Encerrando comparação.\n");
         return 1;
     }
 
-    // Menu dinâmico para escolha do segundo atributo
+    // Menu dinâmico para o segundo atributo (exclui o primeiro)
     printf("\nEscolha o segundo atributo para comparação (diferente do primeiro):\n");
     for (int i = 1; i <= 5; i++) {
         if (i != atributo1) {
@@ -125,18 +126,19 @@ int main() {
     printf("Opção: ");
     scanf("%d", &atributo2);
 
+    // Validação do segundo atributo
     if (atributo2 < 1 || atributo2 > 5 || atributo2 == atributo1) {
         printf("\nErro: Atributo inválido ou repetido. Encerrando comparação.\n");
         return 1;
     }
 
-    // Obter valores dos atributos para cada carta
+    // Obtenção dos valores dos atributos para cada carta
     float valor1_carta1 = obterValor(cartas[indice1], atributo1);
     float valor1_carta2 = obterValor(cartas[indice2], atributo1);
     float valor2_carta1 = obterValor(cartas[indice1], atributo2);
     float valor2_carta2 = obterValor(cartas[indice2], atributo2);
 
-    // Exibir os valores comparados
+    // Exibição dos valores comparados
     printf("\nComparação dos atributos:\n");
 
     printf("\nAtributo 1: %s\n", nomeAtributo(atributo1));
@@ -147,21 +149,18 @@ int main() {
     printf("%s: %.2f\n", cartas[indice1].nome, valor2_carta1);
     printf("%s: %.2f\n", cartas[indice2].nome, valor2_carta2);
 
-    // Determinar vencedor de cada atributo
+    // Comparação individual dos atributos
     int pontosCarta1 = 0, pontosCarta2 = 0;
 
-    // Comparação do primeiro atributo
+    // Regra especial: densidade populacional → menor valor vence
     if (atributo1 == 5) {
-        // Densidade populacional: menor vence
         (valor1_carta1 < valor1_carta2) ? pontosCarta1++ :
         (valor1_carta2 < valor1_carta1) ? pontosCarta2++ : 0;
     } else {
-        // Maior valor vence
         (valor1_carta1 > valor1_carta2) ? pontosCarta1++ :
         (valor1_carta2 > valor1_carta1) ? pontosCarta2++ : 0;
     }
 
-    // Comparação do segundo atributo
     if (atributo2 == 5) {
         (valor2_carta1 < valor2_carta2) ? pontosCarta1++ :
         (valor2_carta2 < valor2_carta1) ? pontosCarta2++ : 0;
@@ -170,7 +169,24 @@ int main() {
         (valor2_carta2 > valor2_carta1) ? pontosCarta2++ : 0;
     }
 
-    // A lógica de soma e decisão final será implementada no próximo commit
+    // Soma dos dois atributos para cada carta
+    float somaCarta1 = valor1_carta1 + valor2_carta1;
+    float somaCarta2 = valor1_carta2 + valor2_carta2;
+
+    // Exibição da soma
+    printf("\nSoma dos atributos:\n");
+    printf("%s: %.2f + %.2f = %.2f\n", cartas[indice1].nome, valor1_carta1, valor2_carta1, somaCarta1);
+    printf("%s: %.2f + %.2f = %.2f\n", cartas[indice2].nome, valor1_carta2, valor2_carta2, somaCarta2);
+
+    // Resultado final da rodada
+    printf("\nResultado da rodada:\n");
+    if (somaCarta1 > somaCarta2) {
+        printf("Vencedora: %s (%s)\n", cartas[indice1].nome, cartas[indice1].codigo);
+    } else if (somaCarta2 > somaCarta1) {
+        printf("Vencedora: %s (%s)\n", cartas[indice2].nome, cartas[indice2].codigo);
+    } else {
+        printf("Empate!\n");
+    }
 
     return 0;
-}
+}    
