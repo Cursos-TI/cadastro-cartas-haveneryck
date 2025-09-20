@@ -2,14 +2,15 @@
 
 #define TOTAL_CARTAS 4
 
+// Estrutura que representa uma carta do Super Trunfo
 typedef struct {
-    char codigo[4];
-    int populacao;
-    float area;
-    float pib;
-    int pontosTuristicos;
-    float densidadePopulacional;
-    float pibPerCapita;
+    char codigo[4];               // Código da carta (ex: A01)
+    int populacao;               // População total
+    float area;                  // Área em km²
+    float pib;                   // PIB em bilhões
+    int pontosTuristicos;       // Número de pontos turísticos
+    float densidadePopulacional;// População / Área
+    float pibPerCapita;         // PIB / População
 } Carta;
 
 int main() {
@@ -17,6 +18,7 @@ int main() {
 
     printf("Cadastro das cartas do Super Trunfo - Países\n");
 
+    // Loop para cadastrar os dados de cada carta
     for (int i = 0; i < TOTAL_CARTAS; i++) {
         printf("\nCarta %d\n", i + 1);
         printf("Código (ex: A01): ");
@@ -34,12 +36,14 @@ int main() {
         printf("Número de pontos turísticos: ");
         scanf("%d", &cartas[i].pontosTuristicos);
 
+        // Cálculo da densidade populacional
         if (cartas[i].area > 0) {
             cartas[i].densidadePopulacional = cartas[i].populacao / cartas[i].area;
         } else {
             cartas[i].densidadePopulacional = 0;
         }
 
+        // Cálculo do PIB per capita
         if (cartas[i].populacao > 0) {
             cartas[i].pibPerCapita = cartas[i].pib / cartas[i].populacao;
         } else {
@@ -47,6 +51,7 @@ int main() {
         }
     }
 
+    // Exibição dos dados das cartas cadastradas
     printf("\nCartas cadastradas:\n");
 
     for (int i = 0; i < TOTAL_CARTAS; i++) {
@@ -59,6 +64,7 @@ int main() {
         printf("PIB per Capita: %.6f bilhões/hab\n", cartas[i].pibPerCapita);
     }
 
+    // Cálculo do super poder de duas cartas escolhidas
     int indice1, indice2;
     printf("\nEscolha duas cartas para comparar (0 a %d):\n", TOTAL_CARTAS - 1);
     printf("Índice da primeira carta: ");
@@ -78,6 +84,7 @@ int main() {
                         cartas[indice2].pontosTuristicos +
                         cartas[indice2].pibPerCapita;
 
+    // Comparação entre os atributos das duas cartas
     printf("\nComparação entre %s e %s:\n", cartas[indice1].codigo, cartas[indice2].codigo);
 
     printf("População: %s\n", cartas[indice1].populacao > cartas[indice2].populacao ? cartas[indice1].codigo : cartas[indice2].codigo);
@@ -87,9 +94,11 @@ int main() {
     printf("PIB per Capita: %s\n", cartas[indice1].pibPerCapita > cartas[indice2].pibPerCapita ? cartas[indice1].codigo : cartas[indice2].codigo);
     printf("Densidade Populacional (vence o menor): %s\n", cartas[indice1].densidadePopulacional < cartas[indice2].densidadePopulacional ? cartas[indice1].codigo : cartas[indice2].codigo);
 
+    // Exibição do super poder total
     printf("\nSuper Poder de %s: %.2f\n", cartas[indice1].codigo, superPoder1);
     printf("Super Poder de %s: %.2f\n", cartas[indice2].codigo, superPoder2);
 
+    // Determinação da carta vencedora geral
     if (superPoder1 > superPoder2) {
         printf("Carta vencedora geral: %s\n", cartas[indice1].codigo);
     } else if (superPoder2 > superPoder1) {
@@ -97,6 +106,6 @@ int main() {
     } else {
         printf("Empate geral entre as cartas!\n");
     }
- 
+
     return 0;
 }
