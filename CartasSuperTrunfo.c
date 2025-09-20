@@ -64,7 +64,7 @@ int main() {
         printf("PIB per Capita: %.6f bilhões/hab\n", cartas[i].pibPerCapita);
     }
 
-    // Cálculo do super poder de duas cartas escolhidas
+    // Escolha de duas cartas para comparação
     int indice1, indice2;
     printf("\nEscolha duas cartas para comparar (0 a %d):\n", TOTAL_CARTAS - 1);
     printf("Índice da primeira carta: ");
@@ -72,39 +72,19 @@ int main() {
     printf("Índice da segunda carta: ");
     scanf("%d", &indice2);
 
-    float superPoder1 = cartas[indice1].populacao +
-                        cartas[indice1].area +
-                        cartas[indice1].pib +
-                        cartas[indice1].pontosTuristicos +
-                        cartas[indice1].pibPerCapita;
+    // Comparação por atributo fixo: População
+    printf("\nComparação de cartas (Atributo: População):\n\n");
 
-    float superPoder2 = cartas[indice2].populacao +
-                        cartas[indice2].area +
-                        cartas[indice2].pib +
-                        cartas[indice2].pontosTuristicos +
-                        cartas[indice2].pibPerCapita;
+    printf("Carta 1 - %s: %d habitantes\n", cartas[indice1].codigo, cartas[indice1].populacao);
+    printf("Carta 2 - %s: %d habitantes\n", cartas[indice2].codigo, cartas[indice2].populacao);
 
-    // Comparação entre os atributos das duas cartas
-    printf("\nComparação entre %s e %s:\n", cartas[indice1].codigo, cartas[indice2].codigo);
-
-    printf("População: %s\n", cartas[indice1].populacao > cartas[indice2].populacao ? cartas[indice1].codigo : cartas[indice2].codigo);
-    printf("Área: %s\n", cartas[indice1].area > cartas[indice2].area ? cartas[indice1].codigo : cartas[indice2].codigo);
-    printf("PIB: %s\n", cartas[indice1].pib > cartas[indice2].pib ? cartas[indice1].codigo : cartas[indice2].codigo);
-    printf("Pontos turísticos: %s\n", cartas[indice1].pontosTuristicos > cartas[indice2].pontosTuristicos ? cartas[indice1].codigo : cartas[indice2].codigo);
-    printf("PIB per Capita: %s\n", cartas[indice1].pibPerCapita > cartas[indice2].pibPerCapita ? cartas[indice1].codigo : cartas[indice2].codigo);
-    printf("Densidade Populacional (vence o menor): %s\n", cartas[indice1].densidadePopulacional < cartas[indice2].densidadePopulacional ? cartas[indice1].codigo : cartas[indice2].codigo);
-
-    // Exibição do super poder total
-    printf("\nSuper Poder de %s: %.2f\n", cartas[indice1].codigo, superPoder1);
-    printf("Super Poder de %s: %.2f\n", cartas[indice2].codigo, superPoder2);
-
-    // Determinação da carta vencedora geral
-    if (superPoder1 > superPoder2) {
-        printf("Carta vencedora geral: %s\n", cartas[indice1].codigo);
-    } else if (superPoder2 > superPoder1) {
-        printf("Carta vencedora geral: %s\n", cartas[indice2].codigo);
+    // Lógica de decisão usando if e if-else
+    if (cartas[indice1].populacao > cartas[indice2].populacao) {
+        printf("\nResultado: Carta 1 (%s) venceu!\n", cartas[indice1].codigo);
+    } else if (cartas[indice2].populacao > cartas[indice1].populacao) {
+        printf("\nResultado: Carta 2 (%s) venceu!\n", cartas[indice2].codigo);
     } else {
-        printf("Empate geral entre as cartas!\n");
+        printf("\nResultado: Empate entre as cartas!\n");
     }
 
     return 0;
