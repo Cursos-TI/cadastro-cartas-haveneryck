@@ -10,10 +10,34 @@ typedef struct {
     int populacao;               // População total
     float area;                  // Área em km²
     float pib;                   // PIB em bilhões
-    int pontosTuristicos;       // Número de pontos turísticos
-    float densidadePopulacional;// População / Área
-    float pibPerCapita;         // PIB / População
+    int pontosTuristicos;        // Número de pontos turísticos
+    float densidadePopulacional; // População / Área
+    float pibPerCapita;          // PIB / População
 } Carta;
+
+// Função auxiliar para obter o valor do atributo
+float obterValor(Carta c, int atributo) {
+    switch (atributo) {
+        case 1: return c.populacao;
+        case 2: return c.area;
+        case 3: return c.pib;
+        case 4: return c.pontosTuristicos;
+        case 5: return c.densidadePopulacional;
+        default: return 0;
+    }
+}
+
+// Função auxiliar para obter o nome do atributo
+char* nomeAtributo(int atributo) {
+    switch (atributo) {
+        case 1: return "População";
+        case 2: return "Área";
+        case 3: return "PIB";
+        case 4: return "Pontos turísticos";
+        case 5: return "Densidade populacional";
+        default: return "Desconhecido";
+    }
+}
 
 int main() {
     Carta cartas[TOTAL_CARTAS];
@@ -95,13 +119,7 @@ int main() {
     printf("\nEscolha o segundo atributo para comparação (diferente do primeiro):\n");
     for (int i = 1; i <= 5; i++) {
         if (i != atributo1) {
-            switch (i) {
-                case 1: printf("1 - População\n"); break;
-                case 2: printf("2 - Área\n"); break;
-                case 3: printf("3 - PIB\n"); break;
-                case 4: printf("4 - Pontos turísticos\n"); break;
-                case 5: printf("5 - Densidade populacional\n"); break;
-            }
+            printf("%d - %s\n", i, nomeAtributo(i));
         }
     }
     printf("Opção: ");
@@ -112,7 +130,47 @@ int main() {
         return 1;
     }
 
-    // A lógica de comparação e soma será implementada no próximo commit
+    // Obter valores dos atributos para cada carta
+    float valor1_carta1 = obterValor(cartas[indice1], atributo1);
+    float valor1_carta2 = obterValor(cartas[indice2], atributo1);
+    float valor2_carta1 = obterValor(cartas[indice1], atributo2);
+    float valor2_carta2 = obterValor(cartas[indice2], atributo2);
+
+    // Exibir os valores comparados
+    printf("\nComparação dos atributos:\n");
+
+    printf("\nAtributo 1: %s\n", nomeAtributo(atributo1));
+    printf("%s: %.2f\n", cartas[indice1].nome, valor1_carta1);
+    printf("%s: %.2f\n", cartas[indice2].nome, valor1_carta2);
+
+    printf("\nAtributo 2: %s\n", nomeAtributo(atributo2));
+    printf("%s: %.2f\n", cartas[indice1].nome, valor2_carta1);
+    printf("%s: %.2f\n", cartas[indice2].nome, valor2_carta2);
+
+    // Determinar vencedor de cada atributo
+    int pontosCarta1 = 0, pontosCarta2 = 0;
+
+    // Comparação do primeiro atributo
+    if (atributo1 == 5) {
+        // Densidade populacional: menor vence
+        (valor1_carta1 < valor1_carta2) ? pontosCarta1++ :
+        (valor1_carta2 < valor1_carta1) ? pontosCarta2++ : 0;
+    } else {
+        // Maior valor vence
+        (valor1_carta1 > valor1_carta2) ? pontosCarta1++ :
+        (valor1_carta2 > valor1_carta1) ? pontosCarta2++ : 0;
+    }
+
+    // Comparação do segundo atributo
+    if (atributo2 == 5) {
+        (valor2_carta1 < valor2_carta2) ? pontosCarta1++ :
+        (valor2_carta2 < valor2_carta1) ? pontosCarta2++ : 0;
+    } else {
+        (valor2_carta1 > valor2_carta2) ? pontosCarta1++ :
+        (valor2_carta2 > valor2_carta1) ? pontosCarta2++ : 0;
+    }
+
+    // A lógica de soma e decisão final será implementada no próximo commit
 
     return 0;
 }
