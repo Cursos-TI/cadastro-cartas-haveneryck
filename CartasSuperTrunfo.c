@@ -1,10 +1,12 @@
 #include <stdio.h>
+#include <string.h>
 
 #define TOTAL_CARTAS 4
 
 // Estrutura que representa uma carta do Super Trunfo
 typedef struct {
     char codigo[4];               // Código da carta (ex: A01)
+    char nome[30];                // Nome do país
     int populacao;               // População total
     float area;                  // Área em km²
     float pib;                   // PIB em bilhões
@@ -23,6 +25,9 @@ int main() {
         printf("\nCarta %d\n", i + 1);
         printf("Código (ex: A01): ");
         scanf("%s", cartas[i].codigo);
+
+        printf("Nome do país: ");
+        scanf(" %[^\n]", cartas[i].nome); // Lê nome com espaços
 
         printf("População: ");
         scanf("%d", &cartas[i].populacao);
@@ -56,6 +61,7 @@ int main() {
 
     for (int i = 0; i < TOTAL_CARTAS; i++) {
         printf("\nCódigo: %s\n", cartas[i].codigo);
+        printf("Nome: %s\n", cartas[i].nome);
         printf("População: %d\n", cartas[i].populacao);
         printf("Área: %.2f km²\n", cartas[i].area);
         printf("PIB: %.2f bilhões\n", cartas[i].pib);
@@ -72,6 +78,12 @@ int main() {
     printf("Índice da segunda carta: ");
     scanf("%d", &indice2);
 
+    // Validação dos índices
+    if (indice1 < 0 || indice1 >= TOTAL_CARTAS || indice2 < 0 || indice2 >= TOTAL_CARTAS) {
+        printf("\nErro: Índices inválidos. Encerrando comparação.\n");
+        return 1;
+    }
+
     // Menu interativo para escolha do atributo
     int opcao;
     printf("\nEscolha o atributo para comparação:\n");
@@ -84,17 +96,17 @@ int main() {
     scanf("%d", &opcao);
 
     // Lógica de comparação com switch e if-else aninhado
-    printf("\nComparação entre %s e %s:\n", cartas[indice1].codigo, cartas[indice2].codigo);
+    printf("\nComparação entre %s (%s) e %s (%s):\n", cartas[indice1].codigo, cartas[indice1].nome, cartas[indice2].codigo, cartas[indice2].nome);
 
     switch (opcao) {
         case 1:
             printf("Atributo: População\n");
-            printf("%s: %d habitantes\n", cartas[indice1].codigo, cartas[indice1].populacao);
-            printf("%s: %d habitantes\n", cartas[indice2].codigo, cartas[indice2].populacao);
+            printf("%s: %d habitantes\n", cartas[indice1].nome, cartas[indice1].populacao);
+            printf("%s: %d habitantes\n", cartas[indice2].nome, cartas[indice2].populacao);
             if (cartas[indice1].populacao > cartas[indice2].populacao) {
-                printf("Vencedora: %s\n", cartas[indice1].codigo);
+                printf("Vencedora: %s\n", cartas[indice1].nome);
             } else if (cartas[indice2].populacao > cartas[indice1].populacao) {
-                printf("Vencedora: %s\n", cartas[indice2].codigo);
+                printf("Vencedora: %s\n", cartas[indice2].nome);
             } else {
                 printf("Empate!\n");
             }
@@ -102,12 +114,12 @@ int main() {
 
         case 2:
             printf("Atributo: Área\n");
-            printf("%s: %.2f km²\n", cartas[indice1].codigo, cartas[indice1].area);
-            printf("%s: %.2f km²\n", cartas[indice2].codigo, cartas[indice2].area);
+            printf("%s: %.2f km²\n", cartas[indice1].nome, cartas[indice1].area);
+            printf("%s: %.2f km²\n", cartas[indice2].nome, cartas[indice2].area);
             if (cartas[indice1].area > cartas[indice2].area) {
-                printf("Vencedora: %s\n", cartas[indice1].codigo);
+                printf("Vencedora: %s\n", cartas[indice1].nome);
             } else if (cartas[indice2].area > cartas[indice1].area) {
-                printf("Vencedora: %s\n", cartas[indice2].codigo);
+                printf("Vencedora: %s\n", cartas[indice2].nome);
             } else {
                 printf("Empate!\n");
             }
@@ -115,12 +127,12 @@ int main() {
 
         case 3:
             printf("Atributo: PIB\n");
-            printf("%s: %.2f bilhões\n", cartas[indice1].codigo, cartas[indice1].pib);
-            printf("%s: %.2f bilhões\n", cartas[indice2].codigo, cartas[indice2].pib);
+            printf("%s: %.2f bilhões\n", cartas[indice1].nome, cartas[indice1].pib);
+            printf("%s: %.2f bilhões\n", cartas[indice2].nome, cartas[indice2].pib);
             if (cartas[indice1].pib > cartas[indice2].pib) {
-                printf("Vencedora: %s\n", cartas[indice1].codigo);
+                printf("Vencedora: %s\n", cartas[indice1].nome);
             } else if (cartas[indice2].pib > cartas[indice1].pib) {
-                printf("Vencedora: %s\n", cartas[indice2].codigo);
+                printf("Vencedora: %s\n", cartas[indice2].nome);
             } else {
                 printf("Empate!\n");
             }
@@ -128,12 +140,12 @@ int main() {
 
         case 4:
             printf("Atributo: Pontos turísticos\n");
-            printf("%s: %d pontos\n", cartas[indice1].codigo, cartas[indice1].pontosTuristicos);
-            printf("%s: %d pontos\n", cartas[indice2].codigo, cartas[indice2].pontosTuristicos);
+            printf("%s: %d pontos\n", cartas[indice1].nome, cartas[indice1].pontosTuristicos);
+            printf("%s: %d pontos\n", cartas[indice2].nome, cartas[indice2].pontosTuristicos);
             if (cartas[indice1].pontosTuristicos > cartas[indice2].pontosTuristicos) {
-                printf("Vencedora: %s\n", cartas[indice1].codigo);
+                printf("Vencedora: %s\n", cartas[indice1].nome);
             } else if (cartas[indice2].pontosTuristicos > cartas[indice1].pontosTuristicos) {
-                printf("Vencedora: %s\n", cartas[indice2].codigo);
+                printf("Vencedora: %s\n", cartas[indice2].nome);
             } else {
                 printf("Empate!\n");
             }
@@ -141,12 +153,12 @@ int main() {
 
         case 5:
             printf("Atributo: Densidade populacional\n");
-            printf("%s: %.2f hab/km²\n", cartas[indice1].codigo, cartas[indice1].densidadePopulacional);
-            printf("%s: %.2f hab/km²\n", cartas[indice2].codigo, cartas[indice2].densidadePopulacional);
+            printf("%s: %.2f hab/km²\n", cartas[indice1].nome, cartas[indice1].densidadePopulacional);
+            printf("%s: %.2f hab/km²\n", cartas[indice2].nome, cartas[indice2].densidadePopulacional);
             if (cartas[indice1].densidadePopulacional < cartas[indice2].densidadePopulacional) {
-                printf("Vencedora: %s\n", cartas[indice1].codigo);
+                printf("Vencedora: %s\n", cartas[indice1].nome);
             } else if (cartas[indice2].densidadePopulacional < cartas[indice1].densidadePopulacional) {
-                printf("Vencedora: %s\n", cartas[indice2].codigo);
+                printf("Vencedora: %s\n", cartas[indice2].nome);
             } else {
                 printf("Empate!\n");
             }
