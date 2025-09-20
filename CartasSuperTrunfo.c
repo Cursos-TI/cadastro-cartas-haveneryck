@@ -72,20 +72,7 @@ int main() {
     printf("Índice da segunda carta: ");
     scanf("%d", &indice2);
 
-    // Comparação por atributo fixo: População
-    printf("\nComparação de cartas (Atributo: População):\n");
-
-    printf("\nCarta 1 - Código: %s | População: %d habitantes\n", cartas[indice1].codigo, cartas[indice1].populacao);
-    printf("Carta 2 - Código: %s | População: %d habitantes\n", cartas[indice2].codigo, cartas[indice2].populacao);
-
-    // Lógica de decisão usando if e if-else
-    if (cartas[indice1].populacao > cartas[indice2].populacao) {
-        printf("\nResultado: Carta 1 (%s) venceu com maior população!\n", cartas[indice1].codigo);
-    } else if (cartas[indice2].populacao > cartas[indice1].populacao) {
-        printf("\nResultado: Carta 2 (%s) venceu com maior população!\n", cartas[indice2].codigo);
-    } else {
-        printf("\nResultado: Empate! Ambas as cartas têm a mesma população.\n");
-    }
+    // A lógica de comparação será implementada no próximo commit
 
     return 0;
 }
