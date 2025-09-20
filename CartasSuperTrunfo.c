@@ -18,7 +18,7 @@ int main() {
 
     printf("Cadastro das cartas do Super Trunfo - Países\n");
 
-    // Loop para cadastrar os dados de cada carta
+    // Cadastro das cartas
     for (int i = 0; i < TOTAL_CARTAS; i++) {
         printf("\nCarta %d\n", i + 1);
         printf("Código (ex: A01): ");
@@ -51,7 +51,7 @@ int main() {
         }
     }
 
-    // Exibição dos dados das cartas cadastradas
+    // Exibição das cartas cadastradas
     printf("\nCartas cadastradas:\n");
 
     for (int i = 0; i < TOTAL_CARTAS; i++) {
@@ -73,18 +73,18 @@ int main() {
     scanf("%d", &indice2);
 
     // Comparação por atributo fixo: População
-    printf("\nComparação de cartas (Atributo: População):\n\n");
+    printf("\nComparação de cartas (Atributo: População):\n");
 
-    printf("Carta 1 - %s: %d habitantes\n", cartas[indice1].codigo, cartas[indice1].populacao);
-    printf("Carta 2 - %s: %d habitantes\n", cartas[indice2].codigo, cartas[indice2].populacao);
+    printf("\nCarta 1 - Código: %s | População: %d habitantes\n", cartas[indice1].codigo, cartas[indice1].populacao);
+    printf("Carta 2 - Código: %s | População: %d habitantes\n", cartas[indice2].codigo, cartas[indice2].populacao);
 
     // Lógica de decisão usando if e if-else
     if (cartas[indice1].populacao > cartas[indice2].populacao) {
-        printf("\nResultado: Carta 1 (%s) venceu!\n", cartas[indice1].codigo);
+        printf("\nResultado: Carta 1 (%s) venceu com maior população!\n", cartas[indice1].codigo);
     } else if (cartas[indice2].populacao > cartas[indice1].populacao) {
-        printf("\nResultado: Carta 2 (%s) venceu!\n", cartas[indice2].codigo);
+        printf("\nResultado: Carta 2 (%s) venceu com maior população!\n", cartas[indice2].codigo);
     } else {
-        printf("\nResultado: Empate entre as cartas!\n");
+        printf("\nResultado: Empate! Ambas as cartas têm a mesma população.\n");
     }
 
     return 0;
